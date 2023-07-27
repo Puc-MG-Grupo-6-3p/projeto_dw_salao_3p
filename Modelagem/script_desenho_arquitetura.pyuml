@@ -1,0 +1,19 @@
+@startuml
+package "Dados de Origem" as source_data {
+    [Fichas Cadastrais]
+    [Planilhas Excel]
+    [Programas de Gestão]
+}
+
+package "Máquina Local" as local_computer {
+    [ETL] --> MySQLWorkbench
+    [ETL] ..> [Fichas Cadastrais] : use
+    [ETL] ..> [Planilhas Excel] : use
+    [PowerBI] --> MySQLConnector
+}
+
+database "MySQL" {
+    MySQLConnector -- [SalaoDeBelezaDW]
+    MySQLWorkbench -- [SalaoDeBelezaDW]
+}
+@enduml
